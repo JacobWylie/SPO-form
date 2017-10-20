@@ -5,11 +5,13 @@ import { createStore, applyMiddleware } from 'redux';
 // {BroswerRouter} interacts with the history library and decides what to do 
 // based on a change in the URL.
 // {Route} will show component on page depending on URL. 
-import { BrowserRouter, Route } from 'react-router-dom';
+// {Switch} will differentiate between routes. react-router = lazy routing
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 // Will handle async GET requests by axios
 import promise from 'redux-promise';
 
 import reducers from './reducers';
+import Form from './components/form';
 import Accounts from './components/accounts';
 
 // Enables middleware use in app
@@ -20,8 +22,12 @@ ReactDOM.render(
     	<BrowserRouter>
     		{/* BrowserRouter can only have one child element... */}
     		<div>
-	    		{/* Show component based on user path/url */}
-	    		<Route path="/accounts" component={Accounts} />
+    			{/* Allows specific routing without rendering all / routes */}
+    			<Switch>
+		    		{/* Show component based on user path/url */}
+		    		<Route path="/accounts" component={Accounts} />
+		    		<Route path='/' component={Form} />
+	    		</Switch>
     		</div>
     	</BrowserRouter>
 	</Provider>
