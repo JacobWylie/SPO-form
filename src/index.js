@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+// Manually looks at the url and displays a different set of components on the 
+// screen without a http request or screen refresh. Also, displays new URL.
 // {BroswerRouter} interacts with the history library and decides what to do 
 // based on a change in the URL.
 // {Route} will show component on page depending on URL. 
