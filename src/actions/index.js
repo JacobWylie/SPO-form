@@ -1,13 +1,17 @@
 // Handles AJAX requests
 import axios from 'axios';
 
-export const FETCH_ACCOUNTS = 'fetch-accounts';
+export const FETCH_ACCOUNTS = 'fetch_accounts';
 
-// Get users from db
+// API created for user accounts. Hooked up to mLab.
+const ROOT_URL = 'https://www.jacobwylie.com/api';
+
+// Get users from db and return payload from the action
 export function fetchAccounts() {
-	const request = axios.get('https://www.jacobwylie.com/api/accounts');
+	const request = axios.get(`${ROOT_URL}/accounts`);
 
 	return {
-		type: FETCH_ACCOUNTS
+		type: FETCH_ACCOUNTS,
+		payload: request
 	};
 }
