@@ -6,11 +6,14 @@ import { createStore, applyMiddleware } from 'redux';
 // based on a change in the URL.
 // {Route} will show component on page depending on URL. 
 import { BrowserRouter, Route } from 'react-router-dom';
+// Will handle async GET requests by axios
+import promise from 'redux-promise';
 
 import reducers from './reducers';
-import Users from './components/users';
+import Accounts from './components/accounts';
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+// Enables middleware use in app
+const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 ReactDOM.render(
 	<Provider store={createStoreWithMiddleware(reducers)}>
@@ -18,7 +21,7 @@ ReactDOM.render(
     		{/* BrowserRouter can only have one child element... */}
     		<div>
 	    		{/* Show component based on user path/url */}
-	    		<Route path="/users" component={Users} />
+	    		<Route path="/accounts" component={Accounts} />
     		</div>
     	</BrowserRouter>
 	</Provider>
