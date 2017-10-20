@@ -5,6 +5,11 @@ import { connect } from 'react-redux';
 import { fetchAccounts } from '../actions';
 
 class Accounts extends Component {
+	// Automatically fetchAccounts() as soon as component is rendered
+	componentDidMount() {
+		this.props.fetchAccounts();
+	}
+
 	render() {
 		return (
 			<div>
