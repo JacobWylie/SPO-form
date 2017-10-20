@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 // Connects to reducers to pass data
 import { connect } from 'react-redux';
@@ -10,14 +11,36 @@ class Accounts extends Component {
 		this.props.fetchAccounts();
 	}
 
+	// Helper function to render accounts to page
+	renderAccounts() {
+		// Accounts are now an object (not array) and require lodash _.map()
+		return _.map(this.props.accounts, account=> {
+			return (
+				// Unique key required
+				<li key={post.id}>
+					{post.id}
+				</li>
+			)
+		});
+	}
+
 	render() {
 		return (
+			// Show list of accounts
 			<div>
-				Accounts
+				<h3>Accounts</h3>
+				<ul>
+					{this.renderAccounts()}
+				</ul>
 			</div>
 		);
 	}
 }
 
+// To consume from application level state
+function mapStateToProps(state) {
+	return { accounts: state.accounts }
+}
+
 // Wire up action creator so it's available to component
-export default connect(null, { fetchAccounts })(Accounts);
+export default connect(mapStateToProps, { fetchAccounts })(Accounts);
