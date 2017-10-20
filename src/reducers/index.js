@@ -9,4 +9,18 @@ const rootReducer = combineReducers({
 	accounts: AccountsReducer,
 	form: formReducer
 });
+
 export default rootReducer;
+
+
+
+/////////////////////////
+// redux-form process
+/////////////////////////
+
+// Identify different pieces of form state =>
+// Make one 'Field' component per piece of state => 
+// User changes a 'Field' input =>
+// redux-form automatically handles changes =>
+// User submits form =>
+// App validates inputs and handles form submittal 

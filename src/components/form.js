@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+// { reduxForm } allows component to communicate to formReducer
+import { Field, reduxForm } from 'redux-form';
 
 class Form extends Component {
 	render() {
@@ -10,4 +12,8 @@ class Form extends Component {
 	}
 }
 
-export default Form;
+// reduxForm() simliar to connect()
+// 'form' = name of form
+export default reduxForm({
+	form: ''
+})(Form);
