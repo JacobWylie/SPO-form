@@ -7,20 +7,29 @@ class Form extends Component {
 	// Returns JSX. 'field' argument contains all event handlers 
 	// to connect to specific field
 	renderField(field) {
+		// Destructor field.meta object
+		const { meta } = field;
+
+		// CSS classes for each form field
+		// includes error check to change form css if invalid user input 
+		const inputClass = `form-input ${meta.touched && meta.error ? 'error-input': ''}`; 
+
 		return (
 			<div className="">
 				{/* Form field paramaters passed to this component from each field */}
-				<label>{field.label}</label>
+				{/*<label>{field.label}</label>*/}
 				<input
-					className=""
+					className={inputClass}
 					placeholder={field.placeholder}
 					type={field.type}
 					// all object's properties available as props to input
 					{...field.input}
 				/>
-			{/* Specific property on {field} for handling validation */}
-			{/* 'touched' state is once a user interacts with input and focuses elsewhere */}
-			{field.meta.touched ? field.meta.error : ''}
+				{/* Specific property on {field} for handling validation */}
+				{/* 'touched' state is once a user interacts with input and focuses elsewhere */}
+				<div className="error-text">
+					{meta.touched ? meta.error : ''}
+				</div>
 			</div>
 		)
 	}
@@ -42,6 +51,7 @@ class Form extends Component {
 			// Bind onSubmit() callback to this component
 			// noValidate removes HTML5 defaults 
 			<form onSubmit={handleSubmit(this.onSubmit.bind(this))} noValidate>
+				<h2>Register New Account</h2>
 				<Field
 					label='First Name'
 					name='firstName'
@@ -79,7 +89,7 @@ class Form extends Component {
 					component={this.renderField}
 				/>
 				<button type="submit" className="">
-					Submit
+					&#10003;
 				</button>
 			</form>
 		);
@@ -93,13 +103,13 @@ function validate(values) {
 	const errors = {};
 	// Validate the inputs from {values}
 
-	const regexName = /[a-zA-Z]/
+	const regexName = /^[a-zA-Z]+$/;
 	// First name validation
 	if (!values.firstName) {
 		errors.firstName = "Please enter a first name.";
 	}
 	if (!regexName.test(values.firstName)) {
-		errors.firstName = 'First name may contain upper or lowercase letters';
+		errors.firstName = 'First name may use upper or lowercase letters';
 	}
 
 	// Last name validation
@@ -107,16 +117,16 @@ function validate(values) {
 		errors.lastName = "Please enter a last name.";
 	}
 	if (!regexName.test(values.lastName)) {
-		errors.lastName = 'Last name may contain upper or lowercase letters';
+		errors.lastName = 'Last name may use upper or lowercase letters';
 	}
 
 	// Username Validation
 	if (!values.username) {
 		errors.username = "Please enter a username.";
 	}
-	const regexUsername = /[a-z0-9\.\_]/
+	const regexUsername = /^[a-z0-9\.\_]+$/
 	if (!regexUsername.test(values.username)) {
-		errors.username = 'Username may contain lowercase letters, numbers, ".", and "_"';
+		errors.username = 'Username may use lowercase letters, numbers, "." or "_"';
 	}
 
 	// Password Validation
