@@ -6,11 +6,15 @@ import { Field, reduxForm } from 'redux-form';
 class Form extends Component {
 	// Returns JSX. 'field' argument by convention that contains event handlers 
 	// to connect to specific field
-	renderFirstNameField(field) {
+	renderField(field) {
 		return (
-			<div>
+			<div className="">
+				{/* Form field paramaters passed to this component from each field */}
+				<label>{field.label}</label>
 				<input
-					type="text"
+					className=""
+					placeholder={field.placeholder}
+					type={field.type}
 					// all object's properties available as props to input
 					{...field.input}
 				/>
@@ -22,9 +26,44 @@ class Form extends Component {
 		return(
 			<form>
 				<Field
-					firstName='firstName'
+					label='First Name'
+					name='firstName'
+					placeholder='First Name'
+					type='text'
 					// Tells redux-form what to render to page.
-					component={this.renderFirstNameField}
+					component={this.renderField}
+				/>
+				<Field
+					label='Last Name'
+					name='lastName'
+					placeholder='Last Name'
+					type='text'
+					// Tells redux-form what to render to page.
+					component={this.renderField}
+				/>
+				<Field
+					label='Username'
+					name='username'
+					placeholder='Username'
+					type='text'
+					// Tells redux-form what to render to page.
+					component={this.renderField}
+				/>
+				<Field
+					label='Password'
+					name='password'
+					placeholder='Password'
+					type='password'
+					// Tells redux-form what to render to page.
+					component={this.renderField}
+				/>
+				<Field
+					label='Email'
+					name='email'
+					placeholder='Email'
+					type='email'
+					// Tells redux-form what to render to page.
+					component={this.renderField}
 				/>
 			</form>
 		);
@@ -36,3 +75,26 @@ class Form extends Component {
 export default reduxForm({
 	form: 'NewAccountForm'
 })(Form);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
