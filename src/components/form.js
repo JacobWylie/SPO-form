@@ -19,14 +19,29 @@ class Form extends Component {
 					{...field.input}
 				/>
 			{/* Specific property on {field} for handling validation */}
-			{field.meta.error}
+			{/* 'touched' state is once a user interacts with input and focuses elsewhere */}
+			{field.meta.touched ? field.meta.error : ''}
 			</div>
 		)
 	}
 
+	// Helper function for form
+	onSubmit(values) {
+
+	}
+
 	render() {
+		// Pull handleSubmit function off reduxForm/this.props
+		// es6 rename and destructure
+		// es5 = var handleSubmit = this.props.handleSubmit
+		const { handleSubmit } = this.props;
+
 		return(
-			<form>
+			// handleSubmit() will run reduxFrom/validation. If true will run
+			// our helper function: onSubmit()
+			// Bind onSubmit() callback to this component
+			// noValidate removes HTML5 defaults 
+			<form onSubmit={handleSubmit(this.onSubmit.bind(this))} noValidate>
 				<Field
 					label='First Name'
 					name='firstName'
@@ -63,6 +78,9 @@ class Form extends Component {
 					type='email'
 					component={this.renderField}
 				/>
+				<button type="submit" className="">
+					Submit
+				</button>
 			</form>
 		);
 	}
@@ -75,10 +93,10 @@ function validate(values) {
 	const errors = {};
 	// Validate the inputs from {values}
 
-	const regexName = /[^a-zA-Z]/
+	const regexName = /[a-zA-Z]/
 	// First name validation
 	if (!values.firstName) {
-		errors.firstName = "Please enter your first name.";
+		errors.firstName = "Please enter a first name.";
 	}
 	if (!regexName.test(values.firstName)) {
 		errors.firstName = 'First name may contain upper or lowercase letters';
@@ -86,7 +104,7 @@ function validate(values) {
 
 	// Last name validation
 	if (!values.lastName) {
-		errors.lastName = "Please enter your last name.";
+		errors.lastName = "Please enter a last name.";
 	}
 	if (!regexName.test(values.lastName)) {
 		errors.lastName = 'Last name may contain upper or lowercase letters';
@@ -94,9 +112,9 @@ function validate(values) {
 
 	// Username Validation
 	if (!values.username) {
-		errors.username = "Please enter your username.";
+		errors.username = "Please enter a username.";
 	}
-	const regexUsername = /[^a-z0-9\.\_]/
+	const regexUsername = /[a-z0-9\.\_]/
 	if (!regexUsername.test(values.username)) {
 		errors.username = 'Username may contain lowercase letters, numbers, ".", and "_"';
 	}
@@ -114,11 +132,13 @@ function validate(values) {
 
 	// Email Validation
 	if (!values.email) {
-		errors.email = "Please enter your email.";
+		errors.email = "Please enter an email.";
 	}
 	const regexEmail = /\b[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,20}\b/gi;
-	if (!regexEmail.test(values.email)) {
-		errors.email = 'Please enter a valid email e.g. "name@example.com"';
+	if (values.email) {
+		if (!regexEmail.test(values.email)) {
+			errors.email = 'Please enter a valid email e.g. "name@example.com"';
+		}
 	}
 	// Return the object to redux-form
 	// If object is returned empty, redux-form allows submit
@@ -126,7 +146,7 @@ function validate(values) {
 	return errors;
 }
 
-// reduxForm() simliar to connect()
+// reduxForm() simliar to connect(). Passes additonal properties to our component
 export default reduxForm({
 	// Helper function passed to redux-form
 	validate,
