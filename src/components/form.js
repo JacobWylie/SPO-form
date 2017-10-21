@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 class Form extends Component {
-	// Returns JSX. 'field' argument by convention that contains event handlers 
+	// Returns JSX. 'field' argument contains all event handlers 
 	// to connect to specific field
 	renderField(field) {
 		return (
@@ -18,6 +18,8 @@ class Form extends Component {
 					// all object's properties available as props to input
 					{...field.input}
 				/>
+			{/* Specific property on {field} for handling validation */}
+			{field.meta.error}
 			</div>
 		)
 	}
@@ -103,8 +105,11 @@ function validate(values) {
 	if (!values.password) {
 		errors.password = "Please enter a password";
 	}
-	if (values.password.length <= 8) {
-		errors.password = "Password must contain at least 8 characters"
+	// Password must have a value before checking length or it throws an error
+	if (values.password) {
+		if (values.password.length <= 8) {
+			errors.password = "Password must contain at least 8 characters"
+		}
 	}
 
 	// Email Validation
