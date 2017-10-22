@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchAccount } from '../actions';
 
 class Show extends Component {
+	// Automatically fetchAccount() as soon as component is rendered
+	componentDidMount() {
+		// Retreive the :id's state from the URL for component to call upon from list of accounts in state
+		// Pull id property off this.props.params and name variable 'id'
+		const { id } = this.props.match.params;
+		this.props.fetchAccount(id);
+	}
+
 	render() {
 		return (
 			<div className="account-show">
@@ -10,4 +20,10 @@ class Show extends Component {
 	};
 }
 
-export default Show;
+// Take the accounts out of application level state and into component
+function mapStateToProps({ accounts }) {
+
+}
+
+// Wire up action creator so it's available to component
+export default connect(null, { fetchAccount })(Show);
