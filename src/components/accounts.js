@@ -19,11 +19,11 @@ class Accounts extends Component {
 		return _.map(this.props.accounts, account => {
 			return (
 				// Unique key is account id
-				<Link to="/" key={account._id}>
-					<li className="account-name">
+				<li className="account-name" key={account._id}>
+					<Link to={`/accounts/${account._id}`}>
 						{account.firstName}
-					</li>
-				</Link>
+					</Link>
+				</li>
 			)
 		});
 	}

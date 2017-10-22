@@ -24,6 +24,12 @@ body:before {
 	z-index: -1;
 }
 
+a {
+	text-decoration: none;
+	color: #0059ff;
+}
+
+
 /***********************************/
 /* 			FORM STYLES            */
 /***********************************/
@@ -60,7 +66,7 @@ form button {
 	display: block;
 	margin: 5px auto;
 	font-size: 26px;
-	color: #5382D9;
+	/*color: #5382D9;*/
 	background-color: #fff;
 	border: 1px solid #5382D9;
 	cursor: pointer;
@@ -124,22 +130,27 @@ ul {
 	display: inline-block;
 	padding: 2px;
 	margin: 3px;
-	color: #2c73f7;
+	color: #0059ff
 }
 
-.account-name:hover,
+.account-name a:hover,
 .create-account-link:hover,
 .accounts-link:hover {
-	color: rgba(83, 130, 217, .8);
-	transition: 0.15s ease-in-out;
+	color: rgba(83, 130, 217, .5);
+	transition: 0.1s ease-in-out;
 	text-decoration: underline;
 }
+
+.account-name a:visited {
+	color: #0059ff
+}
+
 
 .create-account-link,
 .accounts-link {
 	text-align: center;
 	display: block;
-	color: #2c73f7;
+	color: #0059ff;
 	font-size: 14px;
 }
 
@@ -168,6 +179,10 @@ ul {
 
 .account-show h4 {
 	letter-spacing: .08em;
+}
+
+.account-show .accounts-link {
+	margin: 0px 0 10px 0;
 }
 
 
