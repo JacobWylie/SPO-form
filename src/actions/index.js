@@ -18,9 +18,13 @@ export function fetchAccounts() {
 }
 
 // POST new account to db
-export function createAccount(values) {
+// callback (this.props.history.push('/accounts') pass from Form
+export function createAccount(values, callback) {
 	// POST to api with form values
-	const request = axios.post(ROOT_URL, values);
+	const request = axios.post(ROOT_URL, values)
+		// after request is complete, call callback function (this.props.history.push('/accounts'))
+		// which navigate to accounts after new account is created
+		.then(() => callback());
 
 	return {
 		type: CREATE_ACCOUNT,

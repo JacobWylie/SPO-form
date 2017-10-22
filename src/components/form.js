@@ -38,9 +38,14 @@ class Form extends Component {
 		)
 	}
 
-	// Helper function for form to POST. Call on createAccount() action creator.
+	// Helper function for form to POST.
 	onSubmit(values) {
-		this.props.createAccount(values);
+		// Call on createAccount() action creator. Pass through values from form
+		this.props.createAccount(values, () => {
+			// Built in prop used for navigation. Go to defined route.
+			// Callback allaws axios to finish before auto-navigation
+			this.props.history.push('/accounts')
+		});
 	}
 
 	render() {
