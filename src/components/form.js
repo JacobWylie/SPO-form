@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 // Allows navigation between pages in app without http request
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createAccount } from '../actions';
 
 class Form extends Component {
 	// Returns JSX. 'field' argument contains all event handlers 
@@ -36,9 +38,9 @@ class Form extends Component {
 		)
 	}
 
-	// Helper function for form
+	// Helper function for form to POST. Call on createAccount() action creator.
 	onSubmit(values) {
-
+		this.props.createAccount(values);
 	}
 
 	render() {
@@ -168,7 +170,10 @@ export default reduxForm({
 	validate,
 	// unique string to differentiate between forms
 	form: 'NewAccountForm'
-})(Form);
+})(
+	// connect createAccount action creator to component
+	connect(null, { createAccount })(Form)
+);
 
 
 
