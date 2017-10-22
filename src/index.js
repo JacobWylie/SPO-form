@@ -15,6 +15,7 @@ import promise from 'redux-promise';
 import reducers from './reducers';
 import Form from './components/form';
 import Accounts from './components/accounts';
+import Show from './components/show';
 
 // Enables middleware use in app
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
@@ -27,6 +28,7 @@ ReactDOM.render(
     			{/* Allows specific routing without rendering all / routes */}
     			<Switch>
 		    		{/* Show component based on user path/url */}
+		    		<Route path="/accounts/:id" component={Show} />
 		    		<Route path="/accounts" component={Accounts} />
 		    		<Route path='/' component={Form} />
 	    		</Switch>

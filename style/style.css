@@ -28,7 +28,9 @@ body:before {
 /* 			FORM STYLES            */
 /***********************************/
 
-form {
+form, 
+.accounts, 
+.account-show {
 	position: relative;
 	background: #FFFFFF;
 	box-shadow: 0px 2px 18px 1px rgba(33,71,119,0.4);
@@ -110,24 +112,11 @@ form button:focus {
 }
 
 /***********************************/
-/* 		  ACCOUNTS STYLES          */
+/* 		ACCOUNTS LIST STYLES       */
 /***********************************/
 
 ul {
 	list-style: none;
-}
-
-.accounts {
-	position: relative;
-	background: #FFFFFF;
-	box-shadow: 0px 2px 18px 1px rgba(33,71,119,0.4);
-	border-radius: 5px;
-	width: 467px;
-	height: 540px;
-	margin: auto;
-	top: 50px;
-  	box-sizing: border-box;
-  	padding: 10px 60px 20px 60px;
 }
 
 .account-name {
@@ -155,8 +144,9 @@ ul {
 }
 
 
-
-
+/***********************************/
+/* 	    ACCOUNT SHOW STYLES        */
+/***********************************/
 
 
 
