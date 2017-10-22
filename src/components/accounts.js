@@ -20,7 +20,7 @@ class Accounts extends Component {
 			return (
 				// Unique key is account id
 				<Link to="/" key={account._id}>
-					<li>
+					<li className="account-name">
 						{account.firstName}
 					</li>
 				</Link>
@@ -31,17 +31,17 @@ class Accounts extends Component {
 	render() {
 		return (
 			// Show list of accounts
-			<div>
+			<div className="accounts">
 				<div>
+					<h2>Accounts</h2>
 					{/* Link back to home/create new account form */}
-					<Link to="/">
-						Create another account
-					</Link>
 				</div>
-				<h3>Accounts</h3>
 				<ul>
 					{this.renderAccounts()}
 				</ul>
+				<Link to="/" className="create-account-link">
+						Create another account
+				</Link>
 			</div>
 		);
 	}

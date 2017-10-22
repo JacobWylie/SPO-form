@@ -96,7 +96,7 @@ class Form extends Component {
 					&#10003;
 				</button>
 				{/* Link to accounts */}
-				<Link to="/accounts">
+				<Link to="/accounts" className="accounts-link">
 					View all accounts
 				</Link>
 			</form>
