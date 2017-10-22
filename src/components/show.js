@@ -17,13 +17,16 @@ class Show extends Component {
 				<h2>Account</h2>
 			</div>
 		);
-	};
+	}
 }
 
 // Take the accounts out of application level state and into component
-function mapStateToProps({ accounts }) {
-
+// Second argument is the props object specific to this component.
+// Component will receive only one account from url 
+// rather then returning entire list.
+function mapStateToProps({ accounts, ownProps }) {
+	return { account: accounts[ownProps.match.params.id] };
 }
 
 // Wire up action creator so it's available to component
-export default connect(null, { fetchAccount })(Show);
+export default connect(mapStateToProps, { fetchAccount })(Show);
