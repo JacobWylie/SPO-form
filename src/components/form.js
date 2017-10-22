@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 // { Field } interacts with redux-form. Does not render to page.
 // { reduxForm } allows component to communicate to formReducer
 import { Field, reduxForm } from 'redux-form';
+// Allows navigation between pages in app without http request
+import { Link } from 'react-router-dom';
 
 class Form extends Component {
 	// Returns JSX. 'field' argument contains all event handlers 
@@ -91,6 +93,10 @@ class Form extends Component {
 				<button type="submit" className="">
 					&#10003;
 				</button>
+				{/* Link to accounts */}
+				<Link to="/accounts">
+					View all accounts
+				</Link>
 			</form>
 		);
 	}
