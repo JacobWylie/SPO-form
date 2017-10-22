@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "React form for Service Partner ONE junior-dev",
   "main": "index.js",
+  "homepage": "/spo-form",
   "repository": "https://github.com/JacobWylie/SPO-form.git",
   "scripts": {
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
