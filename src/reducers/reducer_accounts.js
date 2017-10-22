@@ -21,7 +21,7 @@ export default function(state = {}, action) {
 		// ES6 syntax to do the same as above
 		// Key interpolation: [make a new key on this object with this value] and
 		// set it's value to : whatever is here.
-		return { ...state, [action.payload.data.accounts._id]: action.payload.data.accounts };
+		return { ...state, [action.payload.data.account.id]: action.payload.data };
 
 	// Handles all accounts from axios and adds to state
 	// Use lodash .mapKeys() to take a property out of an array record and create

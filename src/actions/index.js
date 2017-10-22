@@ -34,7 +34,7 @@ export function createAccount(values, callback) {
 }
 
 // Action creator to fetch a specific account :id
-export function fetchAccount(id) {
+export function fetchAccount(id, callback) {
 	const request = axios.get(`${ROOT_URL}/${id}`);
 
 	return {
