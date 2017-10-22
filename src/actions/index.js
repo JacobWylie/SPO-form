@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export const FETCH_ACCOUNTS = 'fetch_accounts';
 export const CREATE_ACCOUNT = 'create_account';
+export const FETCH_ACCOUNT = 'fetch_account';
 
 // API created for user accounts. Hooked up to mLab.
 const ROOT_URL = 'https://www.jacobwylie.com/api/accounts';
@@ -28,6 +29,16 @@ export function createAccount(values, callback) {
 
 	return {
 		type: CREATE_ACCOUNT,
+		payload: request
+	};
+}
+
+// Action creator to fetch a specific account :id
+export function fetchAccount(id) {
+	const request = axios.get(`${ROOT_URL}/${id}`);
+
+	return {
+		type: FETCH_ACCOUNT,
 		payload: request
 	};
 }
