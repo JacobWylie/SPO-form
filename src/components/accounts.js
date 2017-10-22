@@ -16,12 +16,14 @@ class Accounts extends Component {
 	// Helper function to render accounts to page
 	renderAccounts() {
 		// Accounts are now an object (not array) and require lodash _.map()
-		return _.map(this.props.accounts, account=> {
+		return _.map(this.props.accounts, account => {
 			return (
-				// Unique key required
-				<li key={post.id}>
-					{post.id}
-				</li>
+				// Unique key is account id
+				<Link to="/" key={account._id}>
+					<li>
+						{account.firstName}
+					</li>
+				</Link>
 			)
 		});
 	}

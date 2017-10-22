@@ -8,9 +8,8 @@ export default function(state = {}, action) {
 	// Handles new incoming accounts
 	// Use lodash .mapKeys() to take a property out of an array record and create
 	// an object where the id is the key and the value is the account info.
-	// ??? possibly need _id ???
 	case FETCH_ACCOUNTS:
-		return _.mapKeys(action.payload.data, 'id');
+		return _.mapKeys(action.payload.data.accounts, '_id');
 	// Catch default and return state
 	default:
 		return state;

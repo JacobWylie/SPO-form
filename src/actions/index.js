@@ -4,7 +4,7 @@ import axios from 'axios';
 export const FETCH_ACCOUNTS = 'fetch_accounts';
 
 // API created for user accounts. Hooked up to mLab.
-const ROOT_URL = 'http://localhost:8085/api';
+const ROOT_URL = 'https://www.jacobwylie.com/api';
 
 // Get users from db and return payload from the action
 export function fetchAccounts() {
