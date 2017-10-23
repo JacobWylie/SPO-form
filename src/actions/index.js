@@ -4,6 +4,7 @@ import axios from 'axios';
 export const FETCH_ACCOUNTS = 'fetch_accounts';
 export const CREATE_ACCOUNT = 'create_account';
 export const FETCH_ACCOUNT = 'fetch_account';
+export const DELETE_ACCOUNT = 'delete_account';
 
 // API created for user accounts. Hooked up to mLab.
 const ROOT_URL = 'https://www.jacobwylie.com/api/accounts';
@@ -34,7 +35,7 @@ export function createAccount(values, callback) {
 }
 
 // Action creator to fetch a specific account :id
-export function fetchAccount(id, callback) {
+export function fetchAccount(id) {
 	const request = axios.get(`${ROOT_URL}/${id}`);
 
 	return {
@@ -42,3 +43,37 @@ export function fetchAccount(id, callback) {
 		payload: request
 	};
 }
+
+// Action creator to delete an account with :id
+// payload does not need to return the account info. just the id so
+// the reducer can remove it from app level state
+// Callback so navigation to /accounts does not happen until account is deleted
+export function deleteAccount(id, callback) {
+	const request = axios.delete(`${ROOT_URL}/${id}`)
+		.then(() => callback());
+
+	return {
+		type: DELETE_ACCOUNT,
+		payload: id
+	};
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
