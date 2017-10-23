@@ -64,9 +64,9 @@ form button {
 	height: 50px;
 	border-radius: 50%;
 	display: block;
-	margin: 5px auto;
+	margin: 5px auto 25px auto;
 	font-size: 26px;
-	/*color: #5382D9;*/
+	color: #5382D9;
 	background-color: #fff;
 	border: 1px solid #5382D9;
 	cursor: pointer;
@@ -114,7 +114,7 @@ form button:focus {
 }
 
 .accounts-link {
-	margin-top: 25px;
+	margin-top: 10px;
 }
 
 /***********************************/
@@ -181,8 +181,19 @@ ul {
 	letter-spacing: .08em;
 }
 
-.account-show .accounts-link {
-	margin: 0px 0 10px 0;
+.accounts-delete {
+	text-align: center;
+	display: block;
+	color: red;
+	font-size: 14px;
+	margin-top: 40px;
+}
+
+.accounts-delete:hover {
+	color: rgba(255, 0, 0, .5);
+	transition: 0.1s ease-in-out;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchAccount } from '../actions';
+import { fetchAccount, deleteAccount } from '../actions';
 import { Link } from 'react-router-dom';
 
 class Show extends Component {
@@ -11,6 +11,17 @@ class Show extends Component {
 			// Pull id property off this.props.params and name variable 'id'
 			const { id } = this.props.match.params;
 			this.props.fetchAccount(id);
+	}
+
+	// Helper function to delete account
+	onDeleteClick() {
+		const { id } = this.props.match.params;
+		// When someone clicks delete, action creator waits for axios.delete to finish before navigation
+		this.props.deleteAccount(id, () => {
+			// Built in prop used for navigation. Go to defined route.
+			// Callback allaws axios to finish before auto-navigation
+			this.props.history.push('/accounts');
+		});
 	}
 
 
@@ -35,6 +46,12 @@ class Show extends Component {
 				<h4>{account.username}</h4>
 				<h3>Email:</h3>
 				<h4>{account.email}</h4>
+				<a 
+					className="accounts-delete"
+					onClick={this.onDeleteClick.bind(this)}
+				>
+					Delete Account
+				</a>
 				<Link to="/accounts" className="accounts-link">
 					View all accounts
 				</Link>
@@ -54,5 +71,18 @@ function mapStateToProps({ accounts } , ownProps) {
 	return { account: accounts[ownProps.match.params._id] };
 }
 
-// Wire up action creator so it's available to component
-export default connect(mapStateToProps, { fetchAccount })(Show);
+// Wire up action creators so it's available to component
+export default connect(mapStateToProps, { fetchAccount, deleteAccount })(Show);
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -37374,6 +37374,13 @@
 		var action = arguments[1];
 
 		switch (action.type) {
+			// Update local state to reflect deleted account
+			// action.payload contains the id of deleted account
+			// access state and remove deleted account
+			case _actions.DELETE_ACCOUNT:
+				// _.omit looks into object and removes key/second argument
+				// action.payload is id of deleted account
+				return _lodash2.default.omit(state, action.payload);
 
 			// When one account is called, add to state
 			// Spread operator will take all previously called accounts in state and add them
@@ -49780,10 +49787,11 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.FETCH_ACCOUNT = exports.CREATE_ACCOUNT = exports.FETCH_ACCOUNTS = undefined;
+	exports.DELETE_ACCOUNT = exports.FETCH_ACCOUNT = exports.CREATE_ACCOUNT = exports.FETCH_ACCOUNTS = undefined;
 	exports.fetchAccounts = fetchAccounts;
 	exports.createAccount = createAccount;
 	exports.fetchAccount = fetchAccount;
+	exports.deleteAccount = deleteAccount;
 
 	var _axios = __webpack_require__(467);
 
@@ -49794,6 +49802,7 @@
 	var FETCH_ACCOUNTS = exports.FETCH_ACCOUNTS = 'fetch_accounts'; // Handles AJAX requests
 	var CREATE_ACCOUNT = exports.CREATE_ACCOUNT = 'create_account';
 	var FETCH_ACCOUNT = exports.FETCH_ACCOUNT = 'fetch_account';
+	var DELETE_ACCOUNT = exports.DELETE_ACCOUNT = 'delete_account';
 
 	// API created for user accounts. Hooked up to mLab.
 	var ROOT_URL = 'https://www.jacobwylie.com/api/accounts';
@@ -49826,12 +49835,27 @@
 	}
 
 	// Action creator to fetch a specific account :id
-	function fetchAccount(id, callback) {
+	function fetchAccount(id) {
 		var request = _axios2.default.get(ROOT_URL + '/' + id);
 
 		return {
 			type: FETCH_ACCOUNT,
 			payload: request
+		};
+	}
+
+	// Action creator to delete an account with :id
+	// payload does not need to return the account info. just the id so
+	// the reducer can remove it from app level state
+	// Callback so navigation to /accounts does not happen until account is deleted
+	function deleteAccount(id, callback) {
+		var request = _axios2.default.delete(ROOT_URL + '/' + id).then(function () {
+			return callback();
+		});
+
+		return {
+			type: DELETE_ACCOUNT,
+			payload: id
 		};
 	}
 
@@ -51779,6 +51803,23 @@
 
 				this.props.fetchAccount(id);
 			}
+
+			// Helper function to delete account
+
+		}, {
+			key: 'onDeleteClick',
+			value: function onDeleteClick() {
+				var _this2 = this;
+
+				var id = this.props.match.params.id;
+				// When someone clicks delete, action creator waits for axios.delete to finish before navigation
+
+				this.props.deleteAccount(id, function () {
+					// Built in prop used for navigation. Go to defined route.
+					// Callback allaws axios to finish before auto-navigation
+					_this2.props.history.push('/accounts');
+				});
+			}
 		}, {
 			key: 'render',
 			value: function render() {
@@ -51845,6 +51886,14 @@
 						account.email
 					),
 					_react2.default.createElement(
+						'a',
+						{
+							className: 'accounts-delete',
+							onClick: this.onDeleteClick.bind(this)
+						},
+						'Delete Account'
+					),
+					_react2.default.createElement(
 						_reactRouterDom.Link,
 						{ to: '/accounts', className: 'accounts-link' },
 						'View all accounts'
@@ -51873,8 +51922,8 @@
 		return { account: accounts[ownProps.match.params._id] };
 	}
 
-	// Wire up action creator so it's available to component
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchAccount: _actions.fetchAccount })(Show);
+	// Wire up action creators so it's available to component
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchAccount: _actions.fetchAccount, deleteAccount: _actions.deleteAccount })(Show);
 
 /***/ })
 /******/ ]);
