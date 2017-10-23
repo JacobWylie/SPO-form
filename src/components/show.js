@@ -13,6 +13,12 @@ class Show extends Component {
 			this.props.fetchAccount(id);
 	}
 
+	// Helper function to delete account
+	onDeleteClick() {
+		const { id } = this.props.match.params;
+		this.props.deleteAccount(id);
+	}
+
 
 	render() {
 		// Makes component wait for account info to be received before trying to render to page
@@ -35,6 +41,13 @@ class Show extends Component {
 				<h4>{account.username}</h4>
 				<h3>Email:</h3>
 				<h4>{account.email}</h4>
+				<Link 
+					to="/accounts" 
+					className="accounts-delete"
+					onClick={this.onDeleteClick.bind(this)}
+				>
+					Delete Account
+				</Link>
 				<Link to="/accounts" className="accounts-link">
 					View all accounts
 				</Link>

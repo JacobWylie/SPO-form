@@ -48,7 +48,7 @@ cd SPO-form
 
 ```
 
-#### Install modules
+#### Install modules and start webpack
 
 ```
 
@@ -81,7 +81,7 @@ npm start
 * Navigation between components
 
 
-** API Routes
+## API Routes
 
 | Endpoint                                  | Method          | Description                              | 
 | ---------------------------------------   |:---------------:| ----------------------------------------:|
