@@ -1,11 +1,17 @@
 import _ from 'lodash';
-import { FETCH_ACCOUNTS } from '../actions';
-import { FETCH_ACCOUNT } from '../actions';
+import { FETCH_ACCOUNTS, FETCH_ACCOUNT, DELETE_ACCOUNT } from '../actions';
 
 // Receive previous accounts state and modify on request
 // Default state is empty object
 export default function(state = {}, action) {
 	switch (action.type) {
+	// Update local state to reflect deleted account
+	// action.payload contains the id of deleted account
+	// access state and remove deleted account
+	case DELETE_ACCOUNT:
+		// _.omit looks into object and removes key/second argument
+		// action.payload is id of deleted account
+		return _.omit(state, action.payload)
 
 	// When one account is called, add to state
 	// Spread operator will take all previously called accounts in state and add them

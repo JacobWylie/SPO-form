@@ -20,7 +20,7 @@ class Show extends Component {
 		this.props.deleteAccount(id, () => {
 			// Built in prop used for navigation. Go to defined route.
 			// Callback allaws axios to finish before auto-navigation
-			this.props.history.push('/accounts')
+			this.props.history.push('/accounts');
 		});
 	}
 
