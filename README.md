@@ -1,4 +1,4 @@
-# # SPO recruitment task for junior front-end developers
+# SPO recruitment task for junior front-end developers
 
 ## Make a registration form
 
@@ -28,6 +28,103 @@ Please demonstrate your ability to work with React and use the best practices of
 
 # My solution
 
-Live demo: [https://jacobwylie.github.io/SPO-form/](https://jacobwylie.github.io/SPO-form/)
+#### Live Demo: [https://jacobwylie.github.io/SPO-form/](https://jacobwylie.github.io/SPO-form/)
+
+#### Form Repo: [https://github.com/JacobWylie/SPO-form](https://github.com/JacobWylie/SPO-form)
+
+#### API Repo: [https://github.com/JacobWylie/SPO-form-api](https://github.com/JacobWylie/SPO-form-api)
+
+#### API Entry: [https://jacobwylie.com/api/accounts](https://jacobwylie.com/api/accounts)
+
+
+## Install and run locally
+
+#### Clone repo
+
+```
+
+git clone https://github.com/JacobWylie/SPO-form.git
+cd SPO-form
+
+```
+
+#### Install modules
+
+```
+
+npm install
+npm start
+
+```
+
+#### Navigate to http://localhost:8085/ in your browser
+
+
+## Features
+
+* User registration form with required fields
+
+* Form validation in accordance with mandatory rules
+
+* Red text and input border informing user of error or invalid entry parameters
+
+* Submit button disabled and then enabled once all form fields are valid
+
+* Backend API built with node, express, and mongoDB to handle data for this exercise
+
+* On submit, user is taken to component with list of all accounts created
+
+* User can go to show component for individual accounts
+
+* User can delete accounts
+
+* Navigation between components
+
+
+** API Routes
+
+| Endpoint                                  | Method          | Description                              | 
+| ---------------------------------------   |:---------------:| ----------------------------------------:|
+| https://jacobwylie.com/api/accounts       | GET             | Return JSON data of all accounts         |
+|                                           |                 |                                          |
+| https://jacobwylie.com/api/accounts       | POST            | Create new account. Returns account data |
+|                                           |                 |                                          |
+| https://jacobwylie.com/api/accounts/:id   | GET             | Fetches single account from :id          |
+|                                           |                 |                                          |
+| https://jacobwylie.com/api/accounts/:id   | DELETE          | Delete single account from :id           |
+|                                           |                 |                                          |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
