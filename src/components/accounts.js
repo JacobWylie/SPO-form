@@ -29,6 +29,11 @@ class Accounts extends Component {
 	}
 
 	render() {
+		// Makes component wait for axios to finish to be before trying to render to page
+		if (!this.props.accounts) {
+			return <div>Loading...</div>
+		}
+
 		return (
 			// Show list of accounts
 			<div className="accounts">
