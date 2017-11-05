@@ -165,7 +165,7 @@ function validate(values) {
 	}
 	// Return the object to redux-form
 	// If object is returned empty, redux-form allows submit
-	// If objec has any properties, from is invalid
+	// If object has any properties, from is invalid
 	return errors;
 }
 

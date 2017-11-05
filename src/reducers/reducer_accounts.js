@@ -27,6 +27,7 @@ export default function(state = {}, action) {
 		// ES6 syntax to do the same as above
 		// Key interpolation: [make a new key on this object with this value] and
 		// set it's value to : whatever is here.
+		// ... spread operator will add new account info to state
 		return { ...state, [action.payload.data.account.id]: action.payload.data };
 
 	// Handles all accounts from axios and adds to state

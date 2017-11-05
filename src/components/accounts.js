@@ -8,7 +8,8 @@ import { Link } from 'react-router-dom';
 import { fetchAccounts } from '../actions';
 
 class Accounts extends Component {
-	// Automatically fetchAccounts() as soon as component is rendered
+	// Lifecycle method
+	// Automatically fetchAccounts() after component is rendered
 	componentDidMount() {
 		this.props.fetchAccounts();
 	}
@@ -59,3 +60,15 @@ function mapStateToProps(state) {
 
 // Wire up action creator so it's available to component
 export default connect(mapStateToProps, { fetchAccounts })(Accounts);
+
+
+
+
+
+
+
+
+
+
+
+
